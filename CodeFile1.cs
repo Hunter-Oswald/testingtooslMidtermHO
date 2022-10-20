@@ -51,7 +51,7 @@ public class pacmanTournament
                 newplayer.playerID = firstname[0] + lastname[0] + pacman.generateID();
                 newplayer.score = 0;
 
-                pacman.register(newplayer);
+                pacman.register(newplayer, pacman.players);
 
             } else if(input == "2")
             {
@@ -65,19 +65,19 @@ public class pacmanTournament
                 newScore = Console.ReadLine();
 
                 
-                pacman.updateScore(newID, Convert.ToInt32(newScore));
+                pacman.updateScore(newID, Convert.ToInt32(newScore), pacman.players);
 
             } else if (input == "3")
             {
                 // display players high to low
                 
-                pacman.display();
+                pacman.display(pacman.players);
 
             } else if (input == "4")
             {
                 // clear the list
                 
-                pacman.listClear();
+                pacman.listClear(pacman.players);
 
             } else if (input == "5")
             {
@@ -92,16 +92,16 @@ public class pacmanTournament
     }
 
     // register method
-    public void register(player newP)
+    public void register(player newP, player[] listOfPlayers)
     {
         // to keep track of if a slot is found
         int slot = 5;
         bool slotFound = false;
 
         // see if there's an empty space
-        for (int i = 0; i < players.Length; i++)
+        for (int i = 0; i < listOfPlayers.Length; i++)
         {
-            if(players[i] == null)
+            if(listOfPlayers[i] == null)
             {
                 slotFound = true;
                 if (i <= slot)
@@ -114,7 +114,7 @@ public class pacmanTournament
         // if there's no spot, let the user know
         if (slotFound)
         {
-            players[slot] = newP;
+            listOfPlayers[slot] = newP;
             Console.WriteLine("Player successfully registered!");
             // sort!
             sort();
@@ -126,13 +126,13 @@ public class pacmanTournament
     }
 
     // update score method
-    public void updateScore(string existingP, int newScore)
+    public void updateScore(string existingP, int newScore, player[] listOfPlayers)
     {
-        for (int i = 0; i < players.Length; i++)
+        for (int i = 0; i < listOfPlayers.Length; i++)
         {
-            if (players[i] != null && players[i].playerID == existingP)
+            if (listOfPlayers[i] != null && listOfPlayers[i].playerID == existingP)
             {
-                players[i].score = newScore;
+                listOfPlayers[i].score = newScore;
                 Console.WriteLine("Score successfully updated!");
             }
         }
@@ -143,24 +143,24 @@ public class pacmanTournament
     }
 
     // display players method
-    public void display()
+    public void display(player[] listOfPlayers)
     {
         Console.WriteLine("Players: ");
-        for (int i = 0; i < players.Length; i++)
+        for (int i = 0; i < listOfPlayers.Length; i++)
         {
-            if (players[i] != null)
+            if (listOfPlayers[i] != null)
             {
-                Console.WriteLine(players[i].firstName + " " + players[i].lastName + " - " + players[i].score);
+                Console.WriteLine(listOfPlayers[i].firstName + " " + listOfPlayers[i].lastName + " - " + listOfPlayers[i].score);
             }
         }
     }
 
     // clear list method
-    public void listClear()
+    public void listClear(player[] listOfPlayers)
     {
-        for (int i = 0; i < players.Length; i++)
+        for (int i = 0; i < listOfPlayers.Length; i++)
         {
-            players[i] = null;
+            listOfPlayers[i] = null;
         }
 
         Console.WriteLine("List successfully cleared.");
@@ -168,22 +168,22 @@ public class pacmanTournament
     }
 
     // sorting method
-    public void sort()
+    public void sort(player[] lplayers)
     {
         // insertion sort
-        for (int j = 1; j < players.Length; j++)
+        for (int j = 1; j < lplayers.Length; j++)
         {
             {
                 for (int i = j; i > 0; i--)
                 {
                     // swap i and i-1
-                    if (players[i] != null && players[i - 1] != null)
+                    if (lplayers[i] != null && lplayers[i - 1] != null)
                     {
-                        if (players[i].score < players[i - 1].score)
+                        if (lplayers[i].score < lplayers[i - 1].score)
                         {
-                            player temp = players[i];
-                            players[i] = players[i - 1];
-                            players[i - 1] = temp;
+                            player temp = lplayers[i];
+                            lplayers[i] = lplayers[i - 1];
+                            lplayers[i - 1] = temp;
                         }
                     }
                 }
