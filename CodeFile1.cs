@@ -2,6 +2,7 @@
 // oct 19th 2022
 using System;
 using System.Security.Principal;
+using System.Threading;
 using testingtooslMidtermHO;
 
 
@@ -52,9 +53,22 @@ public class pacmanTournament
                 newplayer.playerID = firstname[0] + lastname[0] + randomStudentID;
                 newplayer.score = Convert.ToInt32(newscore);
 
+                pacmanTournament pacman = new pacmanTournament();
+                pacman.register(newplayer);
+
             } else if(input == "2")
             {
                 // update score
+                Console.WriteLine("Please enter your player ID: ");
+                string newID = "";
+                newID = Console.ReadLine();
+
+                Console.WriteLine("Please enter your new score: ");
+                string newScore = "";
+                newScore = Console.ReadLine();
+
+                pacmanTournament pacman = new pacmanTournament();
+                pacman.updateScore(newID, Convert.ToInt32(newScore));
 
             } else if (input == "3")
             {
@@ -113,11 +127,11 @@ public class pacmanTournament
     }
 
     // update score method
-    public void updateScore(player existingP, int newScore)
+    public void updateScore(string existingP, int newScore)
     {
         for (int i = 0; i < players.Length; i++)
         {
-            if (players[i].playerID == existingP.playerID)
+            if (players[i].playerID == existingP)
             {
                 players[i].score = newScore;
                 Console.WriteLine("Score successfully updated!");
