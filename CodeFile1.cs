@@ -128,13 +128,19 @@ public class pacmanTournament
     // update score method
     public void updateScore(string existingP, int newScore, player[] listOfPlayers)
     {
-        for (int i = 0; i < listOfPlayers.Length; i++)
+        if (newScore <= 3333360 && newScore >= 0)
         {
-            if (listOfPlayers[i] != null && listOfPlayers[i].playerID == existingP)
+            for (int i = 0; i < listOfPlayers.Length; i++)
             {
-                listOfPlayers[i].score = newScore;
-                Console.WriteLine("Score successfully updated!");
+                if (listOfPlayers[i] != null && listOfPlayers[i].playerID == existingP)
+                {
+                    listOfPlayers[i].score = newScore;
+                    Console.WriteLine("Score successfully updated!");
+                }
             }
+        } else
+        {
+            Console.WriteLine("Invalid score.");
         }
 
         // Sort!
