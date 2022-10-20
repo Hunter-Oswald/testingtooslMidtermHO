@@ -14,7 +14,7 @@ namespace testingtooslMidtermHO
         public String playerID;
         public int score;
 
-        player newPlayer(string first, string last, string id, int newscore)
+        public player newPlayer(string first, string last, string id, int newscore)
         {
             player newp = new player();
             newp.firstName = first;
@@ -25,7 +25,8 @@ namespace testingtooslMidtermHO
             return newp;
         }
     }
- 
+    
+
 }
 
 

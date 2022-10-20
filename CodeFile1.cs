@@ -95,7 +95,7 @@ public class pacmanTournament
         player newplayer = new player();
         newplayer.firstName = first;
         newplayer.lastName = last;
-        newplayer.playerID = first[0] + last[0] + generateID();
+        newplayer.playerID = String.Concat(first[0], last[0], generateID());
         newplayer.score = 0;
 
         // see if there's an empty space
