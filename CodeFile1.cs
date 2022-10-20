@@ -45,13 +45,7 @@ public class pacmanTournament
                 Console.Write("Please enter the players last name: ");
                 lastname = Console.ReadLine();
 
-                player newplayer = new player();
-                newplayer.firstName = firstname;
-                newplayer.lastName = lastname;
-                newplayer.playerID = firstname[0] + lastname[0] + pacman.generateID();
-                newplayer.score = 0;
-
-                pacman.register(newplayer, pacman.players);
+                pacman.register(firstname, lastname, pacman.players);
 
             } else if(input == "2")
             {
@@ -92,11 +86,17 @@ public class pacmanTournament
     }
 
     // register method
-    public void register(player newP, player[] listOfPlayers)
+    public void register(string first, string last, player[] listOfPlayers)
     {
         // to keep track of if a slot is found
         int slot = 5;
         bool slotFound = false;
+
+        player newplayer = new player();
+        newplayer.firstName = first;
+        newplayer.lastName = last;
+        newplayer.playerID = first[0] + last[0] + generateID();
+        newplayer.score = 0;
 
         // see if there's an empty space
         for (int i = 0; i < listOfPlayers.Length; i++)
@@ -114,10 +114,10 @@ public class pacmanTournament
         // if there's no spot, let the user know
         if (slotFound)
         {
-            listOfPlayers[slot] = newP;
+            listOfPlayers[slot] = newplayer;
             Console.WriteLine("Player successfully registered!");
             // sort!
-            sort();
+            sort(listOfPlayers);
 
         } else
         {
@@ -138,7 +138,7 @@ public class pacmanTournament
         }
 
         // Sort!
-        sort();
+        sort(listOfPlayers);
 
     }
 
