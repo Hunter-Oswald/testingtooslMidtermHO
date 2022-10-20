@@ -185,7 +185,7 @@ public class pacmanTournament
                     // swap i and i-1
                     if (lplayers[i] != null && lplayers[i - 1] != null)
                     {
-                        if (lplayers[i].score < lplayers[i - 1].score)
+                        if (lplayers[i-1].score < lplayers[i].score)
                         {
                             player temp = lplayers[i];
                             lplayers[i] = lplayers[i - 1];
