@@ -48,7 +48,7 @@ public class pacmanTournament
                 player newplayer = new player();
                 newplayer.firstName = firstname;
                 newplayer.lastName = lastname;
-                newplayer.playerID = firstname[0] + lastname[0] + randomStudentID;
+                newplayer.playerID = firstname[0] + lastname[0] + pacman.generateID();
                 newplayer.score = 0;
 
                 pacman.register(newplayer);
@@ -189,5 +189,10 @@ public class pacmanTournament
                 }
             }
         }
+    }
+
+    public string generateID()
+    {
+        return "7881765";
     }
 }
