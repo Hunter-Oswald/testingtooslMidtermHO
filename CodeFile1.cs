@@ -1,15 +1,13 @@
 ﻿// hunter oswald 8781756 - testing tools and methodologies midterm
 // oct 19th 2022
 using System;
+using System.Security.Principal;
 using testingtooslMidtermHO;
 
 
 
 public class pacmanTournament
 {
-    // random arrangement of my student ID 8781756
-    int randomStudentID = 7881765;
-
     // array of players
     player[] players = new player[5];
 
@@ -17,7 +15,8 @@ public class pacmanTournament
     {
         string input = "";
 
-        
+        // random arrangement of my student ID 8781756
+        string randomStudentID = "7881765";
 
         // while the user has not exited
         while (input != "5")
@@ -33,6 +32,25 @@ public class pacmanTournament
             if (input == "1")
             {
                 // register a player
+                string firstname;
+                string lastname;
+                string id;
+                string newscore = "";
+
+                Console.Write("Please enter the players first name: ");
+                firstname = Console.ReadLine();
+
+                Console.Write("Please enter the players last name: ");
+                lastname = Console.ReadLine();
+
+                Console.Write("Please enter your score: ");
+                newscore = Console.ReadLine();
+
+                player newplayer = new player();
+                newplayer.firstName = firstname;
+                newplayer.lastName = lastname;
+                newplayer.playerID = firstname[0] + lastname[0] + randomStudentID;
+                newplayer.score = Convert.ToInt32(newscore);
 
             } else if(input == "2")
             {
@@ -86,6 +104,7 @@ public class pacmanTournament
             players[slot] = newP;
             Console.WriteLine("Player successfully registered!");
             // sort!
+            sort();
 
         } else
         {
@@ -106,6 +125,7 @@ public class pacmanTournament
         }
 
         // Sort!
+        sort();
 
     }
 
@@ -134,6 +154,16 @@ public class pacmanTournament
     // sorting method
     public void sort()
     {
-
+        // insertion sort
+        for (int j = 1; j < players.Length; j++)
+        {
+            for (int i = j; i > 0 && players[i].score < players[i - 1].score; i--)
+            {
+                // swap i and i-1
+                player temp = players[i];
+                players[i] = players[i - 1];
+                players[i - 1] = temp;
+            }
+        }
     }
 }
