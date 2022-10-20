@@ -19,10 +19,12 @@ public class pacmanTournament
         // random arrangement of my student ID 8781756
         string randomStudentID = "7881765";
 
+
+        pacmanTournament pacman = new pacmanTournament();
         // while the user has not exited
         while (input != "5")
         {
-            Console.WriteLine("1. Register plauer");
+            Console.WriteLine("1. Register player");
             Console.WriteLine("2. Update score");
             Console.WriteLine("3. Display list of players (highest score to lowest)");
             Console.WriteLine("4. Clear the list of players");
@@ -36,7 +38,6 @@ public class pacmanTournament
                 string firstname;
                 string lastname;
                 string id;
-                string newscore = "";
 
                 Console.Write("Please enter the players first name: ");
                 firstname = Console.ReadLine();
@@ -44,16 +45,12 @@ public class pacmanTournament
                 Console.Write("Please enter the players last name: ");
                 lastname = Console.ReadLine();
 
-                Console.Write("Please enter your score: ");
-                newscore = Console.ReadLine();
-
                 player newplayer = new player();
                 newplayer.firstName = firstname;
                 newplayer.lastName = lastname;
                 newplayer.playerID = firstname[0] + lastname[0] + randomStudentID;
-                newplayer.score = Convert.ToInt32(newscore);
+                newplayer.score = 0;
 
-                pacmanTournament pacman = new pacmanTournament();
                 pacman.register(newplayer);
 
             } else if(input == "2")
@@ -67,19 +64,19 @@ public class pacmanTournament
                 string newScore = "";
                 newScore = Console.ReadLine();
 
-                pacmanTournament pacman = new pacmanTournament();
+                
                 pacman.updateScore(newID, Convert.ToInt32(newScore));
 
             } else if (input == "3")
             {
                 // display players high to low
-                pacmanTournament pacman = new pacmanTournament();
+                
                 pacman.display();
 
             } else if (input == "4")
             {
                 // clear the list
-                pacmanTournament pacman = new pacmanTournament();
+                
                 pacman.listClear();
 
             } else if (input == "5")
@@ -105,9 +102,6 @@ public class pacmanTournament
         for (int i = 0; i < players.Length; i++)
         {
             if(players[i] == null)
-            {
-
-            } else
             {
                 slotFound = true;
                 if (i <= slot)
@@ -136,7 +130,7 @@ public class pacmanTournament
     {
         for (int i = 0; i < players.Length; i++)
         {
-            if (players[i].playerID == existingP)
+            if (players[i] != null && players[i].playerID == existingP)
             {
                 players[i].score = newScore;
                 Console.WriteLine("Score successfully updated!");
@@ -151,10 +145,13 @@ public class pacmanTournament
     // display players method
     public void display()
     {
-        Console.WriteLine("Players:");
+        Console.WriteLine("Players: ");
         for (int i = 0; i < players.Length; i++)
         {
-            Console.WriteLine(players[i] + " - " + players[i].score);
+            if (players[i] != null)
+            {
+                Console.WriteLine(players[i].firstName + " " + players[i].lastName + " - " + players[i].score);
+            }
         }
     }
 
@@ -176,12 +173,20 @@ public class pacmanTournament
         // insertion sort
         for (int j = 1; j < players.Length; j++)
         {
-            for (int i = j; i > 0 && players[i].score < players[i - 1].score; i--)
             {
-                // swap i and i-1
-                player temp = players[i];
-                players[i] = players[i - 1];
-                players[i - 1] = temp;
+                for (int i = j; i > 0; i--)
+                {
+                    // swap i and i-1
+                    if (players[i] != null && players[i - 1] != null)
+                    {
+                        if (players[i].score < players[i - 1].score)
+                        {
+                            player temp = players[i];
+                            players[i] = players[i - 1];
+                            players[i - 1] = temp;
+                        }
+                    }
+                }
             }
         }
     }
