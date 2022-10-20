@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace testingtooslMidtermHO
 {
-    internal class player
+    public class player
     {
         String firstName;
         String lastName;
-        String playerID;
-        int score;
+        public String playerID;
+        public int score;
     }
 }
