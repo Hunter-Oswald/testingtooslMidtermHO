@@ -73,14 +73,19 @@ public class pacmanTournament
             } else if (input == "3")
             {
                 // display players high to low
+                pacmanTournament pacman = new pacmanTournament();
+                pacman.display();
 
             } else if (input == "4")
             {
                 // clear the list
+                pacmanTournament pacman = new pacmanTournament();
+                pacman.listClear();
 
             } else if (input == "5")
             {
                 // exit and close app
+                System.Environment.Exit(1);
 
             } else
             {
